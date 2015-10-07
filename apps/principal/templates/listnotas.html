@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<table>
+		<thead>
+        <tr>
+            <th>Alumno </th>
+            <th>Pais</th>
+            <th>Materia</th>
+            <th>Calificacion</th> 
+        </tr>
+        </thead>
+        {% for x in notas %}
+		<tr>
+			<td>{{x.alumno.nombre}} </td>
+			<td>  {{x.alumno.pais}} </td>
+			<td>{{x.materia}} </td>
+			<td>{{x.calificacion}} </td> 
+		</tr>
+	   {% endfor %}
+	</table>
+</body>
+</html>

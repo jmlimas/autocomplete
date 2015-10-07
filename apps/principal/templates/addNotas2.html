@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body> 
+
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+
+       Alumno: <input id="id_busca" type="text" name='q' placeholder='xxx'>
+        <br>
+        Pais : ????
+        <br>
+        <br>
+		 
+		Materia: {{ form.materia }} 
+        <br>
+        <br>
+		Calificacion : {{ form.calificacion }} <br>
+		<br>
+		 
+		<input type="submit" value="Registrar">
+		
+	</form>
+
+
+</body>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script> 
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ 
+
+<script>
+    
+    $('#id_busca').autocomplete({
+        minLength:3,
+        source:function(req, add){
+            var search=$("#id_busca").val();            
+            $.ajax({
+                url:'/buscanombre_url/',
+                async:false,
+                dataType:'json',
+                type:'GET',
+                data:{'q': search,},
+                success: function(data){
+                    var suggestions=[];
+
+                    $.each(data, function(index, objeto){
+                        suggestions.push(objeto.nombre);
+                    });
+
+                    add(suggestions);
+                    console.log(data);
+                },
+                error:function(err){
+                    alert('error');
+                }
+            });
+        }
+    });
+</script>
+
+</html>
